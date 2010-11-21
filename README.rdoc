@@ -1,9 +1,55 @@
-= invoice
+= InvoicePDF
 
-Description goes here.
+InvoicePDF is a Ruby gem to easily create PDF invoices within your application.
 
-== Contributing to invoice
- 
+I created this to be easily extensible by creating and specifying your own generators to create
+invoices fit for your use.
+
+== Getting Started
+1. Install InvoicePDF as you would any other gem
+	gem install invoicepdf
+
+2. Include the gem in your Gemfile for Rails applications
+	gem "invoicepdf"
+
+3. Start using it in your application
+	invoice = InvoicePDF::Invoice.new( :company => "Drew Tempelmeyer", :company_address => "555 55th St\nNew York, NY 00000", :bill_to => "John Doe", :number => "AZ-100", :notes => "Test invoice")
+	invoice.items << InvoicePDF::LineItem.new(:description => "Here is a line item", :price => 495.00, :quantity => 5)
+	invoice.save
+
+=== Using a generator
+Generators are what actually create the PDF. This allows you to customize the appearance of your invoice by creating a new generator.
+Have a look at lib/generators/standard.rb for an example.
+
+Specifying the generator to use is easy. When creating your Invoice object, use the <tt>:generator</tt> attribute.
+	invoice = InvoicePDF::Invoice.new( :generator => InvoicePDF::Generators::Standard.new, :company => "Drew Tempelmeyer", :company_address => "555 55th St\nNew York, NY 00000", :bill_to => "John Doe", :number => "AZ-100", :notes => "Test invoice")
+
+We're using the InvoicePDF::Generators::Standard generator to create our invoice. When you save the invoice, it will call the <tt>create_pdf</tt> method inside your generator 
+(in this example InvoicePDF::Generators::Standard.create_pdf).
+
+=== Creating a generator
+All generators should be contained within the InvoicePDF::Generators module. Your generator needs to have the <tt>create_pdf</tt> method.
+
+A barebones generator would look something like the following
+	module InvoicePDF
+		module Generators
+			class Barebone
+				include InvoicePDF::Helpers # if you need the helpers
+				def create_pdf( invoice )
+					Prawn::Document.generate("#{invoice.file_path}/#{invoice.file_name}", :dpi => 72) do |pdf|
+						pdf.text "Invoice #{invoice.number}"
+					end
+				end
+			end
+		end
+	end
+
+This would simply create a PDF in your specified directory with the specified file name.
+
+PDF generation is done by using the Prawn gem (http://prawn.majesticseacreature.com/docs/).
+
+== Contributing to InvoicePDF
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
@@ -14,6 +60,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2010 Drew Tempelmeyer. See LICENSE.txt for
-further details.
-
+Copyright (c) 2010 Drew Tempelmeyer. See LICENSE.txt for further details.
