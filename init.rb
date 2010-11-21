@@ -1,1 +1,1 @@
-require 'invoice'
+require 'invoicepdf'
