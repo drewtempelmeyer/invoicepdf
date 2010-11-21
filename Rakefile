@@ -20,6 +20,8 @@ Jeweler::Tasks.new do |gem|
   gem.email = "drewtemp@gmail.com"
   gem.authors = ["Drew Tempelmeyer"]
   gem.add_runtime_dependency 'prawn'
+  gem.files = FileList['Rakefile', 'lib/**/*.rb', 'init.rb']
+  gem.rubyforge_project = 'invoicepdf'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
