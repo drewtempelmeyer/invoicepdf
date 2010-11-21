@@ -43,6 +43,7 @@ Gem::Specification.new do |s|
     "test/helper.rb",
     "test/test_invoice.rb"
   ]
+  s.rubyforge_project = 'invoicepdf'
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
