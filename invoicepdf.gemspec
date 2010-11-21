@@ -23,11 +23,12 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "invoicepdf.gemspec",
+    "lib/generators/standard.rb",
     "lib/invoice.rb",
+    "lib/invoice/helpers.rb",
     "lib/invoice/invoice.rb",
     "lib/invoice/line_item.rb",
-    "lib/invoice/helpers.rb",
-    "lib/generators/standard.rb",
     "test/helper.rb",
     "test/test_invoice.rb"
   ]
