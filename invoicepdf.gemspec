@@ -17,26 +17,18 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    ".document",
-    "Gemfile",
-    "Gemfile.lock",
-    "LICENSE.txt",
-    "README.rdoc",
     "Rakefile",
-    "VERSION",
     "init.rb",
-    "invoicepdf.gemspec",
     "lib/generators/standard.rb",
     "lib/invoice.rb",
     "lib/invoice/helpers.rb",
     "lib/invoice/invoice.rb",
-    "lib/invoice/line_item.rb",
-    "test/helper.rb",
-    "test/test_invoice.rb"
+    "lib/invoice/line_item.rb"
   ]
   s.homepage = %q{http://github.com/drewtempelmeyer/invoicepdf}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
+  s.rubyforge_project = %q{invoicepdf}
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Easily create PDF invoices}
   s.test_files = [
